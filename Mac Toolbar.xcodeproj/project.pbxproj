@@ -7,20 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D4290EED264317B9001417BD /* Mac_ToolbarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4290EEC264317B9001417BD /* Mac_ToolbarApp.swift */; };
 		D4290EEF264317B9001417BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4290EEE264317B9001417BD /* ContentView.swift */; };
 		D4290EF1264317BA001417BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4290EF0264317BA001417BD /* Assets.xcassets */; };
 		D4290EF4264317BA001417BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4290EF3264317BA001417BD /* Preview Assets.xcassets */; };
+		D45EE3B826440819002B6B8D /* Ushi_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45EE3B726440819002B6B8D /* Ushi_Image.swift */; };
+		D4DD7C4526431AA30040D650 /* Mac_ToolbarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */; };
+		D4E3F3B72646D7FF0019D3EB /* ImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */; };
+		D4E3F3BB2646DA070019D3EB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3BA2646DA070019D3EB /* Enums.swift */; };
+		D4E3F3BD2646DE360019D3EB /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3BC2646DE360019D3EB /* ModelData.swift */; };
+		D4E3F3C62646E0840019D3EB /* MainTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3C52646E0840019D3EB /* MainTemplate.swift */; };
+		D4E3F3CA264713880019D3EB /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3C9264713880019D3EB /* ImageList.swift */; };
+		D4F0C4E62648384200C5432C /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0C4E52648384200C5432C /* FileHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D4290EE9264317B9001417BD /* Mac Toolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mac Toolbar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4290EEC264317B9001417BD /* Mac_ToolbarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac_ToolbarApp.swift; sourceTree = "<group>"; };
 		D4290EEE264317B9001417BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4290EF0264317BA001417BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4290EF3264317BA001417BD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4290EF5264317BA001417BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4290EF6264317BA001417BD /* Mac_Toolbar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mac_Toolbar.entitlements; sourceTree = "<group>"; };
+		D45EE3B726440819002B6B8D /* Ushi_Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ushi_Image.swift; sourceTree = "<group>"; };
+		D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac_ToolbarApp.swift; sourceTree = "<group>"; };
+		D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStruct.swift; sourceTree = "<group>"; };
+		D4E3F3BA2646DA070019D3EB /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		D4E3F3BC2646DE360019D3EB /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		D4E3F3C52646E0840019D3EB /* MainTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTemplate.swift; sourceTree = "<group>"; };
+		D4E3F3C9264713880019D3EB /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
+		D4F0C4E52648384200C5432C /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +67,16 @@
 		D4290EEB264317B9001417BD /* Mac Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				D4290EEC264317B9001417BD /* Mac_ToolbarApp.swift */,
+				D4F0C4E42648383500C5432C /* Helpers */,
+				D4E3F3C22646E0460019D3EB /* Views */,
+				D4E3F3BE2646DF2E0019D3EB /* Models */,
+				D4E3F3B92646D9FA0019D3EB /* Datas */,
 				D4290EEE264317B9001417BD /* ContentView.swift */,
 				D4290EF0264317BA001417BD /* Assets.xcassets */,
 				D4290EF5264317BA001417BD /* Info.plist */,
 				D4290EF6264317BA001417BD /* Mac_Toolbar.entitlements */,
 				D4290EF2264317BA001417BD /* Preview Content */,
+				D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */,
 			);
 			path = "Mac Toolbar";
 			sourceTree = "<group>";
@@ -69,6 +87,49 @@
 				D4290EF3264317BA001417BD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D4E3F3B92646D9FA0019D3EB /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */,
+				D4E3F3BA2646DA070019D3EB /* Enums.swift */,
+			);
+			path = Datas;
+			sourceTree = "<group>";
+		};
+		D4E3F3BE2646DF2E0019D3EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4E3F3BC2646DE360019D3EB /* ModelData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D4E3F3C22646E0460019D3EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D4E3F3C32646E0720019D3EB /* Templates */,
+				D45EE3B726440819002B6B8D /* Ushi_Image.swift */,
+				D4E3F3C9264713880019D3EB /* ImageList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D4E3F3C32646E0720019D3EB /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				D4E3F3C52646E0840019D3EB /* MainTemplate.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		D4F0C4E42648383500C5432C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D4F0C4E52648384200C5432C /* FileHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,8 +201,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4E3F3B72646D7FF0019D3EB /* ImageStruct.swift in Sources */,
+				D4E3F3CA264713880019D3EB /* ImageList.swift in Sources */,
+				D4E3F3C62646E0840019D3EB /* MainTemplate.swift in Sources */,
 				D4290EEF264317B9001417BD /* ContentView.swift in Sources */,
-				D4290EED264317B9001417BD /* Mac_ToolbarApp.swift in Sources */,
+				D4E3F3BB2646DA070019D3EB /* Enums.swift in Sources */,
+				D4F0C4E62648384200C5432C /* FileHelper.swift in Sources */,
+				D4DD7C4526431AA30040D650 /* Mac_ToolbarApp.swift in Sources */,
+				D45EE3B826440819002B6B8D /* Ushi_Image.swift in Sources */,
+				D4E3F3BD2646DE360019D3EB /* ModelData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
