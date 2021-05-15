@@ -7,32 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41B12B4264FD08E005C6077 /* SidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B12B3264FD08E005C6077 /* SidebarItem.swift */; };
 		D4290EEF264317B9001417BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4290EEE264317B9001417BD /* ContentView.swift */; };
 		D4290EF1264317BA001417BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4290EF0264317BA001417BD /* Assets.xcassets */; };
 		D4290EF4264317BA001417BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4290EF3264317BA001417BD /* Preview Assets.xcassets */; };
+		D45A4981264FA42000871799 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45A4980264FA42000871799 /* ImageHelper.swift */; };
 		D45EE3B826440819002B6B8D /* Ushi_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45EE3B726440819002B6B8D /* Ushi_Image.swift */; };
 		D4DD7C4526431AA30040D650 /* Mac_ToolbarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */; };
 		D4E3F3B72646D7FF0019D3EB /* ImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */; };
 		D4E3F3BB2646DA070019D3EB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3BA2646DA070019D3EB /* Enums.swift */; };
 		D4E3F3BD2646DE360019D3EB /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3BC2646DE360019D3EB /* ModelData.swift */; };
-		D4E3F3C62646E0840019D3EB /* MainTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3C52646E0840019D3EB /* MainTemplate.swift */; };
 		D4E3F3CA264713880019D3EB /* ImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3C9264713880019D3EB /* ImageList.swift */; };
 		D4F0C4E62648384200C5432C /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0C4E52648384200C5432C /* FileHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D41B12B3264FD08E005C6077 /* SidebarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarItem.swift; sourceTree = "<group>"; };
 		D4290EE9264317B9001417BD /* Mac Toolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mac Toolbar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4290EEE264317B9001417BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4290EF0264317BA001417BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4290EF3264317BA001417BD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4290EF5264317BA001417BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4290EF6264317BA001417BD /* Mac_Toolbar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mac_Toolbar.entitlements; sourceTree = "<group>"; };
+		D45A4980264FA42000871799 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		D45EE3B726440819002B6B8D /* Ushi_Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ushi_Image.swift; sourceTree = "<group>"; };
 		D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac_ToolbarApp.swift; sourceTree = "<group>"; };
 		D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStruct.swift; sourceTree = "<group>"; };
 		D4E3F3BA2646DA070019D3EB /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		D4E3F3BC2646DE360019D3EB /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
-		D4E3F3C52646E0840019D3EB /* MainTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTemplate.swift; sourceTree = "<group>"; };
 		D4E3F3C9264713880019D3EB /* ImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageList.swift; sourceTree = "<group>"; };
 		D4F0C4E52648384200C5432C /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D41B12AF264FD06C005C6077 /* Template */ = {
+			isa = PBXGroup;
+			children = (
+				D41B12B3264FD08E005C6077 /* SidebarItem.swift */,
+			);
+			path = Template;
+			sourceTree = "<group>";
+		};
 		D4290EE0264317B9001417BD = {
 			isa = PBXGroup;
 			children = (
@@ -109,25 +119,18 @@
 		D4E3F3C22646E0460019D3EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D4E3F3C32646E0720019D3EB /* Templates */,
+				D41B12AF264FD06C005C6077 /* Template */,
 				D45EE3B726440819002B6B8D /* Ushi_Image.swift */,
 				D4E3F3C9264713880019D3EB /* ImageList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		D4E3F3C32646E0720019D3EB /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				D4E3F3C52646E0840019D3EB /* MainTemplate.swift */,
-			);
-			path = Templates;
-			sourceTree = "<group>";
-		};
 		D4F0C4E42648383500C5432C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				D4F0C4E52648384200C5432C /* FileHelper.swift */,
+				D45A4980264FA42000871799 /* ImageHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -202,8 +205,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E3F3B72646D7FF0019D3EB /* ImageStruct.swift in Sources */,
+				D45A4981264FA42000871799 /* ImageHelper.swift in Sources */,
 				D4E3F3CA264713880019D3EB /* ImageList.swift in Sources */,
-				D4E3F3C62646E0840019D3EB /* MainTemplate.swift in Sources */,
+				D41B12B4264FD08E005C6077 /* SidebarItem.swift in Sources */,
 				D4290EEF264317B9001417BD /* ContentView.swift in Sources */,
 				D4E3F3BB2646DA070019D3EB /* Enums.swift in Sources */,
 				D4F0C4E62648384200C5432C /* FileHelper.swift in Sources */,

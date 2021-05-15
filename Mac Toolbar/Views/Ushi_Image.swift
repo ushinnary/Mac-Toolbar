@@ -10,17 +10,21 @@ import AppKit
 
 struct Ushi_Image: View {
     var imgObj: StoredImage
-    
     var body: some View {
-        HStack {
+        VStack(alignment: .leading) {
             if let url = URL(fileURLWithPath: imgObj.location) {
                 if let img = NSImage(contentsOf: url) {
                     Image(nsImage: img)
                         .resizable()
-                        .scaledToFit()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(5)
+                    Text(imgObj.name)
+                        .font(.caption)
+                        
                 }
             }
         }
+        .padding(15)
     }
 }
 

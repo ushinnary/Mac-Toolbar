@@ -7,9 +7,10 @@
 
 import Foundation
 
-enum ACCEPTABLE_IMAGE_TYPE: String {
-    case jpg
-    case png
-    case mp4
-    case heic
+enum AcceptableImageExtension: String {
+    case jpg, png, mp4, heic
+}
+
+enum BadFormatError: Error {
+    case unincluded
 }

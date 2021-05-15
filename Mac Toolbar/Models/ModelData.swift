@@ -13,12 +13,13 @@ var lsItems: [StoredImage] = _loadJsonByFileName(jsonFileName)
 
 
 private func _loadJsonByFileName<T: Decodable>(_ filename: String, _ secondCall: Bool = false) -> T {
+    setDefaultImagesJson()
     let data: Data
 
     do {
         data = try fm.read(fileNamed: filename)
     } catch {
-        setDefaultImagesJson()
+        
         if secondCall {
             fatalError("Couldn't read \(filename) from main bundle:\n\(error)")
         }
@@ -40,16 +41,39 @@ func setDefaultImagesJson() -> Void {
     while let file = files?.nextObject() {
         let fullFileName = file as! String
         let splitted = fullFileName.split(separator: ".")
-        let imageName = String(splitted.first!)
-        //let ext = String(splitted[1])
-        let objToAdd: StoredImage = StoredImage(name: imageName, location: "\(systemImagesPath)/\(fullFileName)", group: systemImagesPath, deletable: false)
+        let additionalPathWithName = String(splitted.first!)
+        let imageName = String(additionalPathWithName.split(separator: "/").last!)
+        if (splitted.count < 2) {
+            continue
+        }
+        do {
+            let ext: AcceptableImageExtension? = AcceptableImageExtension(rawValue: String(splitted[1]))
+            if (ext == nil) {
+                throw BadFormatError.unincluded
+            }
+        } catch {
+        continue
+        }
+        let location = "\(systemImagesPath)/\(fullFileName)";
+        let objToAdd: StoredImage = StoredImage(name: imageName, location: location, group: _getLastFolderName(str: location), deletable: false)
         jsonObjects.append(objToAdd)
     }
     createJsonFile(filename: jsonFileName, obj: jsonObjects)
 }
 
+func _getLastFolderName(str: String) -> String {
+    let splitted = str.split(separator: "/").reversed()
+    for word in splitted {
+        let pathWords = word.split(separator: ".")
+        // is not hidden folder
+        if (pathWords.count < 2) {
+            return String(word).replacingOccurrences(of: ".", with: String()).capitalized;
+        }
+    }
+    return "";
+}
+
 func createJsonFile<T: Encodable>(filename: String, obj: T) -> Void {
-//    let filemanager = FileManager.default
     do {
         let jsonData = convertToJson(from: obj)
         try fm.save(fileNamed: filename, data: jsonData!)
