@@ -13,14 +13,15 @@ struct Ushi_Image: View {
     var body: some View {
         VStack(alignment: .leading) {
             if let url = URL(fileURLWithPath: imgObj.location) {
-                if let img = NSImage(contentsOf: url) {
+                if let img = NSImage().resizedImageTo(fromUrl: url) {
                     Image(nsImage: img)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .cornerRadius(5)
+                    Spacer()
                     Text(imgObj.name)
                         .font(.caption)
-                        
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
         }
@@ -32,7 +33,5 @@ struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
         Ushi_Image(imgObj: lsItems[0])
             .padding(.vertical)
-            
-            
     }
 }

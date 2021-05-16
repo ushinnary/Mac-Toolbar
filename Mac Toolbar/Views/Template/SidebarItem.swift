@@ -10,11 +10,14 @@ import SwiftUI
 struct SidebarItems: View {
     private let titles = Array(Set(lsItems.map{$0.group}))
     var body: some View {
-        List {
-            ForEach(titles, id: \.self) { title in
-                SidebarItem(title: title)
-            }
-        }.frame(width: 200, alignment: .center)
+        VStack {
+            List {
+                ForEach(titles, id: \.self) { title in
+                    SidebarItem(title: title)
+                }
+            }.frame(width: 200, alignment: .center)
+        }
+        
     }
 }
 
