@@ -10,28 +10,59 @@ import AppKit
 
 struct Ushi_Image: View {
     var imgObj: StoredImage
+    @State private var image: NSImage? = nil
+    @EnvironmentObject var appState: AppState
+    private var isActive: Bool {
+        return imgObj.location == appState.selectedStoreImage?.location
+    }
     var body: some View {
         VStack(alignment: .leading) {
-            if let url = URL(fileURLWithPath: imgObj.location) {
-                if let img = NSImage().resizedImageTo(fromUrl: url) {
-                    Image(nsImage: img)
+                if image != nil {
+                    Spacer()
+                    Image(nsImage: image!)
                         .resizable()
                         .scaledToFit()
-                        .cornerRadius(5)
+                        .cornerRadius(10)
+                        .overlay(
+                            isActive ? RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.accentColor, lineWidth: 4) : nil
+                        )
+                        .onTapGesture {
+                            appState.selectedStoreImage = !isActive ? imgObj : nil
+                        }
                     Spacer()
-                    Text(imgObj.name)
-                        .font(.caption)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    HStack {
+                        Text(imgObj.name)
+                            .font(.caption)
+                        Spacer()
+                    }
+                    
+                } else {
+                    Text("Loading")
                 }
             }
-        }
+        .onAppear(perform: {
+            renderImage()
+        })
         .padding(15)
     }
+    
+    func renderImage() {
+        if image != nil {return}
+        let url = URL(fileURLWithPath: imgObj.location)
+        if let img = resizedImage(at: url) {
+            image = img
+        }
+//        image = NSImage().resizedImageTo(fromUrl: url)
+    }
+    
 }
 
 struct CircleImage_Previews: PreviewProvider {
+    @EnvironmentObject var appState: AppState
     static var previews: some View {
-        Ushi_Image(imgObj: lsItems[0])
+        Ushi_Image(imgObj: AppState.shared.lsItems.first!)
             .padding(.vertical)
+            .environmentObject(AppState.shared)
     }
 }

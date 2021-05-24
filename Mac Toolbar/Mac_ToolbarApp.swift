@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Mac_ToolbarApp: App {
+    init() {
+        setDefaultImagesJson()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StoreContentView
         }
     }
 }

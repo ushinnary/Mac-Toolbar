@@ -6,6 +6,10 @@
 //
 
 import AppKit
+import Combine
+
+let defaultImageSize = 500
+
 extension NSImage {
     
     func resizedImageTo(sourceImage: NSImage, newSize: NSSize) -> NSImage?{
@@ -24,7 +28,6 @@ extension NSImage {
         newImage.addRepresentation(representation!)
         
         return newImage
-        
     }
     
     func resizedImageTo(fromUrl: URL) -> NSImage? {
@@ -34,11 +37,47 @@ extension NSImage {
         return resizedImageTo(sourceImage: img, newSize: getOptimizedImageSize(img: img))
     }
     
- 
+    func resizedImageCGI(fromUrl: URL) -> NSImage? {
+        guard let img = NSImage(contentsOf: fromUrl) else {
+            return nil
+        }
+        return resized(size: getOptimizedImageSize(img: img))
+    }
+    
+    var cgImage: CGImage? {
+            get {
+                guard let imageData = self.tiffRepresentation else { return nil }
+                guard let sourceData = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }
+                return CGImageSourceCreateImageAtIndex(sourceData, 0, nil)
+            }
+        }
+    
+    // TOO EXPENSIVE IN RAM
+    func resized(size: NSSize?) -> NSImage {
+        let sizeToUse = size ?? getOptimizedImageSize(img: self)
+        let intSize = NSSize(width: Int(sizeToUse.width), height: Int(sizeToUse.height))
+        let cgImage = self.cgImage!
+        let bitsPerComponent = cgImage.bitsPerComponent
+        let colorSpace = cgImage.colorSpace!
+        let bitmapInfo = CGImageAlphaInfo.noneSkipLast
+        let context = CGContext(data: nil,
+                                width: Int(intSize.width),
+                                height: Int(intSize.height),
+                                bitsPerComponent: bitsPerComponent,
+                                bytesPerRow: 0,
+                                space: colorSpace,
+                                bitmapInfo: bitmapInfo.rawValue)!
+
+        context.interpolationQuality = .high
+        context.draw(cgImage,
+                     in: NSRect(x: 0, y: 0, width: intSize.width, height: intSize.height))
+        let img = context.makeImage()!
+        return NSImage(cgImage: img, size: intSize)
+    }
 }
 
 func getOptimizedImageSize(img: NSImage) ->NSSize {
-    let maxImageSize = CGFloat(500)
+    let maxImageSize = CGFloat(defaultImageSize)
     var width = img.size.width
     var height = img.size.height
     if (width <= maxImageSize && height <= maxImageSize) {return img.size}
@@ -51,4 +90,30 @@ func getOptimizedImageSize(img: NSImage) ->NSSize {
         width = height/aspectRatio
     }
     return NSSize(width: width, height: height)
+}
+
+func getNSSizeFromInt(num: Int = defaultImageSize) -> NSSize {
+    let width = CGFloat(num)
+    let height = CGFloat(width / 16 * 9)
+    return NSSize(width: width, height: height)
+}
+
+import ImageIO
+
+// Technique #3
+func resizedImage(at url: URL, for size: CGSize = getNSSizeFromInt()) -> NSImage? {
+    let options: [CFString: Any] = [
+        kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
+        kCGImageSourceCreateThumbnailWithTransform: true,
+        kCGImageSourceShouldCacheImmediately: true,
+        kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height)
+    ]
+
+    guard let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
+        let image = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary)
+    else {
+        return nil
+    }
+
+    return NSImage(cgImage: image, size: size)
 }

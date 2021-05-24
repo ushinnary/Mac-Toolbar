@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct SidebarItems: View {
-    private let titles = Array(Set(lsItems.map{$0.group}))
+    @EnvironmentObject var appState: AppState
+    private var titles: [String] {
+        return Array(Set(appState.lsItems.map{$0.group})).sorted { $0 < $1 }
+    }
     var body: some View {
         VStack {
             List {
@@ -34,5 +37,6 @@ struct SidebarItem: View {
 struct SidebarItem_Previews: PreviewProvider {
     static var previews: some View {
         SidebarItems()
+            .environmentObject(AppState.shared)
     }
 }

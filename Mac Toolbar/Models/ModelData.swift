@@ -9,23 +9,14 @@ import Foundation
 
 private let jsonFileName = "images.json"
 var systemImagesPath: String = "/System/Library/Desktop Pictures"
-var lsItems: [StoredImage] = _loadJsonByFileName(jsonFileName)
 
-
-private func _loadJsonByFileName<T: Decodable>(_ filename: String, _ secondCall: Bool = false) -> T {
-    setDefaultImagesJson()
+func loadJsonByFileName<T: Decodable>(_ filename: String = jsonFileName) throws -> T {
     let data: Data
 
     do {
         data = try fm.read(fileNamed: filename)
     } catch {
-        
-        if secondCall {
-            fatalError("Couldn't read \(filename) from main bundle:\n\(error)")
-        }
-        return _loadJsonByFileName(filename, true)
-    }
-
+        fatalError("Couldn't read \(filename) from main bundle:\n\(error)")    }
     do {
         let decoder = JSONDecoder()
         let result = try decoder.decode(T.self, from: data)
@@ -35,9 +26,19 @@ private func _loadJsonByFileName<T: Decodable>(_ filename: String, _ secondCall:
     }
 }
 func setDefaultImagesJson() -> Void {
+    var jsonObjects: [StoredImage] = []
+    // Getting default values
+    do {
+        let defaultItems: [StoredImage] = try loadJsonByFileName(jsonFileName)
+        defaultItems.filter{$0.deletable}.forEach{
+            jsonObjects.append($0)
+        }
+    } catch {
+        // Do nothing
+    }
     let filemanager = FileManager.default
     let files = filemanager.enumerator(atPath: systemImagesPath)
-    var jsonObjects: [StoredImage] = []
+    
     while let file = files?.nextObject() {
         let fullFileName = file as! String
         let splitted = fullFileName.split(separator: ".")

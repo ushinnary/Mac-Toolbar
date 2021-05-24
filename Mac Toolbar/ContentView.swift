@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var appState: AppState
+    
     var body: some View {
         VStack {
             NavigationView {
                 SidebarItems()
                 HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing:10){
-                        //ImageList()
-                    Text("Choose available image folder first")
+                   
+                        Text("Choose available image folder first")
+                        
                 }
+                
+//                if appState.image != nil {
+//                    VStack {
+//                        Text("Image is selected actually")
+//                    }
+//                }
             }
         }
         .frame(minWidth: 800, idealWidth: .infinity, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 600, idealHeight: .infinity, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
