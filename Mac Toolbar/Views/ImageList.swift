@@ -31,7 +31,17 @@ struct ImageList: View {
             }
             if appState.selectedStoreImage != nil {
                 VStack {
-                    Ushi_Image(imgObj: appState.selectedStoreImage!)
+                    if let image = getOriginalImage(imgObj: appState.selectedStoreImage!) {
+                        Image(nsImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(10)
+                            .onTapGesture {
+                                setSelectedAsBG()
+                            }
+                    }
+                    //setSelectedAsBG
+//                    Ushi_Image(imgObj: appState.selectedStoreImage!)
                 }
             } else {
                 Spacer()

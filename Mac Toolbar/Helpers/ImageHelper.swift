@@ -117,3 +117,13 @@ func resizedImage(at url: URL, for size: CGSize = getNSSizeFromInt()) -> NSImage
 
     return NSImage(cgImage: image, size: size)
 }
+
+func getOptimizedImg(imgObj: StoredImage) -> NSImage? {
+    let url = URL(fileURLWithPath: imgObj.location)
+    return resizedImage(at: url)
+}
+
+func getOriginalImage(imgObj: StoredImage) -> NSImage? {
+    let url = URL(fileURLWithPath: imgObj.location)
+    return NSImage(contentsOf: url)
+}

@@ -15,6 +15,7 @@
 		D442674B265439090038A5D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D442674A265439090038A5D5 /* AppDelegate.swift */; };
 		D45A4981264FA42000871799 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45A4980264FA42000871799 /* ImageHelper.swift */; };
 		D45EE3B826440819002B6B8D /* Ushi_Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45EE3B726440819002B6B8D /* Ushi_Image.swift */; };
+		D463767E265C09E60005749D /* SystemHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D463767D265C09E60005749D /* SystemHelper.swift */; };
 		D4DD7C4526431AA30040D650 /* Mac_ToolbarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */; };
 		D4E3F3B72646D7FF0019D3EB /* ImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */; };
 		D4E3F3BB2646DA070019D3EB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E3F3BA2646DA070019D3EB /* Enums.swift */; };
@@ -35,6 +36,7 @@
 		D442674A265439090038A5D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D45A4980264FA42000871799 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		D45EE3B726440819002B6B8D /* Ushi_Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ushi_Image.swift; sourceTree = "<group>"; };
+		D463767D265C09E60005749D /* SystemHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemHelper.swift; sourceTree = "<group>"; };
 		D4DD7C4426431AA30040D650 /* Mac_ToolbarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mac_ToolbarApp.swift; sourceTree = "<group>"; };
 		D4E3F3B62646D7FF0019D3EB /* ImageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStruct.swift; sourceTree = "<group>"; };
 		D4E3F3BA2646DA070019D3EB /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			children = (
 				D4F0C4E52648384200C5432C /* FileHelper.swift */,
 				D45A4980264FA42000871799 /* ImageHelper.swift */,
+				D463767D265C09E60005749D /* SystemHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				D4426749265437B50038A5D5 /* AppState.swift in Sources */,
 				D4F0C4E62648384200C5432C /* FileHelper.swift in Sources */,
 				D4DD7C4526431AA30040D650 /* Mac_ToolbarApp.swift in Sources */,
+				D463767E265C09E60005749D /* SystemHelper.swift in Sources */,
 				D45EE3B826440819002B6B8D /* Ushi_Image.swift in Sources */,
 				D4E3F3BD2646DE360019D3EB /* ModelData.swift in Sources */,
 			);
