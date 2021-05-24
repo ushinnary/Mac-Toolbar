@@ -34,7 +34,9 @@ struct ImageList: View {
                     Ushi_Image(imgObj: appState.selectedStoreImage!)
                 }
             } else {
+                Spacer()
                 Text("Select image")
+                Spacer()
             }
         }
         
