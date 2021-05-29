@@ -7,6 +7,7 @@
 
 import Foundation
 
+private var didSetDefaultImages = false
 private let jsonFileName = "images.json"
 var systemImagesPath: String = "/System/Library/Desktop Pictures"
 
@@ -16,7 +17,8 @@ func loadJsonByFileName<T: Decodable>(_ filename: String = jsonFileName) throws 
     do {
         data = try fm.read(fileNamed: filename)
     } catch {
-        fatalError("Couldn't read \(filename) from main bundle:\n\(error)")    }
+		throw AppFilesManager.Error.fileNotExists
+	}
     do {
         let decoder = JSONDecoder()
         let result = try decoder.decode(T.self, from: data)
@@ -34,7 +36,12 @@ func setDefaultImagesJson() -> Void {
             jsonObjects.append($0)
         }
     } catch {
-        // Do nothing
+		if (!didSetDefaultImages) {
+			createJsonFile(filename: jsonFileName, obj: jsonObjects)
+			setDefaultImagesJson()
+			didSetDefaultImages = true
+		}
+		
     }
     let filemanager = FileManager.default
     let files = filemanager.enumerator(atPath: systemImagesPath)
@@ -42,6 +49,10 @@ func setDefaultImagesJson() -> Void {
     while let file = files?.nextObject() {
         let fullFileName = file as! String
         let splitted = fullFileName.split(separator: ".")
+		// Is hidden folder
+		if fullFileName.starts(with: ".") {
+			continue
+		}
         let additionalPathWithName = String(splitted.first!)
         let imageName = String(additionalPathWithName.split(separator: "/").last!)
         if (splitted.count < 2) {

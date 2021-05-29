@@ -8,55 +8,59 @@
 import SwiftUI
 
 struct ImageList: View {
-    var selectedGroup: String?
-    @EnvironmentObject var appState: AppState
-    private var items:  [StoredImage]  {
-        return selectedGroup == nil ? appState.lsItems :
-        appState.lsItems.filter{item in
-            return  item.group == selectedGroup
-        }
-    }
-    let columns = [
-        GridItem(.adaptive(minimum: 200, maximum: 200), spacing: 50, alignment: .center)
-        ]
-    var body: some View {
-        HStack {
-            ScrollView {
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(items, id: \.location) { item in
-                                Ushi_Image(imgObj: item)
-                            }
-                        }
-                        .padding(.horizontal)
-            }
-            if appState.selectedStoreImage != nil {
-                VStack {
-                    if let image = getOriginalImage(imgObj: appState.selectedStoreImage!) {
-                        Image(nsImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(10)
-                            .onTapGesture {
-                                setSelectedAsBG()
-                            }
-                    }
-                    //setSelectedAsBG
-//                    Ushi_Image(imgObj: appState.selectedStoreImage!)
-                }
-            } else {
-                Spacer()
-                Text("Select image")
-                Spacer()
-            }
-        }
-        
-    }
+	var selectedGroup: String?
+	@EnvironmentObject var appState: AppState
+	private var items:  [StoredImage]  {
+		return selectedGroup == nil ? appState.lsItems :
+			appState.lsItems.filter{item in
+				return  item.group == selectedGroup
+			}
+	}
+	let columns = [
+		GridItem(.adaptive(minimum: 200, maximum: 200), spacing: 50, alignment: .center)
+	]
+	var body: some View {
+		HStack {
+			ScrollView {
+				LazyVGrid(columns: columns, spacing: 20) {
+					ForEach(items, id: \.location) { item in
+						Ushi_Image(imgObj: item)
+					}
+				}
+				.padding(.horizontal)
+			}
+			.frame(maxWidth: .infinity)
+			VStack {
+				if appState.selectedStoreImage != nil {
+					if let image = getOriginalImage(imgObj: appState.selectedStoreImage!) {
+						Image(nsImage: image)
+							.resizable()
+							.scaledToFit()
+							.cornerRadius(10)
+							.onTapGesture {
+								setSelectedAsBG()
+							}
+							.padding()
+						Spacer()
+					}
+					//setSelectedAsBG
+					//                    Ushi_Image(imgObj: appState.selectedStoreImage!)
+				} else {
+					Spacer()
+					Text("Select image")
+					Spacer()
+				}
+			}
+			.frame(maxWidth: 300, maxHeight: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+		}
+		
+	}
 }
 
 struct ImageList_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageList()
-            .frame(width: 800, height: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-            .environmentObject(AppState.shared)
-    }
+	static var previews: some View {
+		ImageList()
+			.frame(width: 800, height: 600, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+			.environmentObject(AppState.shared)
+	}
 }
