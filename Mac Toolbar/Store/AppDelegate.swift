@@ -7,4 +7,4 @@
 import SwiftUI
 let appState = AppState.shared
 let StoreContentView: some View = ContentView()
-    .environmentObject(appState)
+	.environmentObject(appState)

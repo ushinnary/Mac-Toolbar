@@ -31,20 +31,16 @@ struct ImageList: View {
 			}
 			.frame(maxWidth: .infinity)
 			VStack {
-				if appState.selectedStoreImage != nil {
-					if let image = getOriginalImage(imgObj: appState.selectedStoreImage!) {
-						Image(nsImage: image)
-							.resizable()
-							.scaledToFit()
-							.cornerRadius(10)
-							.onTapGesture {
-								setSelectedAsBG()
-							}
-							.padding()
-						Spacer()
+				if appState.image != nil {
+					Image(nsImage: appState.image!)
+						.resizable()
+						.scaledToFit()
+						.cornerRadius(10)
+						.padding()
+					Button(action: setSelectedAsBG) {
+						Text("Set as background")
 					}
-					//setSelectedAsBG
-					//                    Ushi_Image(imgObj: appState.selectedStoreImage!)
+					Spacer()
 				} else {
 					Spacer()
 					Text("Select image")
