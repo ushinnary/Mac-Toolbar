@@ -22,6 +22,7 @@ struct ContentView: View {
 			}
 		}
 		.frame(minWidth: 800, idealWidth: .infinity, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 600, idealHeight: .infinity, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .center)
+		.onDrop(of: ["public.file-url"], isTargeted: nil, perform: handleOnDrop(providers:))
 	}
 }
 

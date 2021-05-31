@@ -49,8 +49,11 @@ struct ImageList: View {
 			}
 			.frame(maxWidth: 300, maxHeight: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
 		}
+		.onDrop(of: ["public.file-url"], isTargeted: nil, perform: handleOnDrop(providers:))
 		
 	}
+	
+	
 }
 
 struct ImageList_Previews: PreviewProvider {

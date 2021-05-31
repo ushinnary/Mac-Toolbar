@@ -127,3 +127,5 @@ func getOriginalImage(imgObj: StoredImage) -> NSImage? {
 	let url = URL(fileURLWithPath: imgObj.location)
 	return NSImage(contentsOf: url)
 }
+
+

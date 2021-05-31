@@ -27,11 +27,42 @@ func loadJsonByFileName<T: Decodable>(_ filename: String = jsonFileName) throws 
 		throw AppFilesManager.Error.readingFailed
 	}
 }
+fileprivate func updateJson(_ files: FileManager.DirectoryEnumerator?, _ jsonObjects: inout [StoredImage]) {
+	while let file = files?.nextObject() {
+		let fullFileName = file as! String
+		guard let objToAdd: StoredImage = StoredImage(fullFileName: fullFileName) else {continue}
+		if (objToAdd.imageType == nil) {
+			continue
+		}
+		jsonObjects.append(objToAdd)
+	}
+	createJsonFile(filename: jsonFileName, obj: jsonObjects)
+	appState.lsItems = try! loadJsonByFileName()
+}
+
+fileprivate func updateJsonByLocation(_ files: FileManager.DirectoryEnumerator?, _ jsonObjects: inout [StoredImage], location: String) {
+	while let file = files?.nextObject() {
+		let fileName = file as! String
+		let fullFileName = "\(location)\(fileName)"
+		if jsonObjects.contains(where: {$0.location == fullFileName}) {
+//			jsonObjects = jsonObjects.filter{$0.location != fullFileName}
+			continue
+		}
+		guard let objToAdd: StoredImage = StoredImage(location: fullFileName, deletable: true) else {continue}
+		if (objToAdd.imageType == nil) {
+			continue
+		}
+		jsonObjects.append(objToAdd)
+	}
+	createJsonFile(filename: jsonFileName, obj: jsonObjects)
+	appState.lsItems = try! loadJsonByFileName()
+}
+
 func setDefaultImagesJson() -> Void {
 	var jsonObjects: [StoredImage] = []
 	// Getting default values
 	do {
-		let defaultItems: [StoredImage] = try loadJsonByFileName(jsonFileName)
+		let defaultItems: [StoredImage] = try loadJsonByFileName()
 		defaultItems.filter{$0.deletable}.forEach{
 			jsonObjects.append($0)
 		}
@@ -41,31 +72,37 @@ func setDefaultImagesJson() -> Void {
 			setDefaultImagesJson()
 			didSetDefaultImages = true
 		}
-		
 	}
-	let filemanager = FileManager.default
-	let files = filemanager.enumerator(atPath: systemImagesPath)
+	let files = _getItemsFromPath(atPath: systemImagesPath)
+	updateJson(files, &jsonObjects)
+}
+
+func addOrRemoveFileToJson(location: String, isFolder: Bool = false) -> Void {
+	var items = _getCurrentItems(location: location)
+	let files = _getItemsFromPath(atPath: location)
+	if isFolder {
+		updateJsonByLocation(files, &items, location: location)
+	} else {
+		updateJson(files, &items)
+	}
+}
+
+private func _getCurrentItems(location: String)-> [StoredImage] {
+	var currentItems: [StoredImage] = try! loadJsonByFileName()
 	
-	while let file = files?.nextObject() {
-		let fullFileName = file as! String
-		let splitted = fullFileName.split(separator: ".")
-		// Is hidden folder
-		if fullFileName.starts(with: ".") {
-			continue
+	if !currentItems.contains(where: {$0.location == location}) {
+		if let itemToAdd = StoredImage(location: location, deletable: true) {
+			currentItems.append(itemToAdd)
 		}
-		let additionalPathWithName = String(splitted.first!)
-		let imageName = String(additionalPathWithName.split(separator: "/").last!)
-		if (splitted.count != 2) {
-			continue
-		}
-		let location = "\(systemImagesPath)/\(fullFileName)"
-		let objToAdd: StoredImage = StoredImage(name: imageName, location: location, group: _getLastFolderName(str: location), deletable: false)
-		if (objToAdd.imageType == nil) {
-			continue
-		}
-		jsonObjects.append(objToAdd)
+	} else {
+//		currentItems = currentItems.filter{$0.location != location}
 	}
-	createJsonFile(filename: jsonFileName, obj: jsonObjects)
+	return currentItems
+}
+
+func _getItemsFromPath(atPath: String) -> FileManager.DirectoryEnumerator?{
+	let filemanager = FileManager.default
+	return filemanager.enumerator(atPath: atPath)
 }
 
 func _getLastFolderName(str: String) -> String {

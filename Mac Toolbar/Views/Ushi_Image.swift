@@ -29,7 +29,7 @@ struct Ushi_Image: View {
 					)
 					.onTapGesture {
 						appState.selectedStoreImage = !isActive ? imgObj : nil
-						appState.image = image
+						appState.image = appState.selectedStoreImage == nil ? nil : image
 					}
 				Spacer()
 				HStack {
