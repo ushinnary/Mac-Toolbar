@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1477D41726675BC600212C6F /* Spinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1477D41626675BC600212C6F /* Spinner.swift */; };
 		D41B12B4264FD08E005C6077 /* SidebarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B12B3264FD08E005C6077 /* SidebarItem.swift */; };
 		D4290EEF264317B9001417BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4290EEE264317B9001417BD /* ContentView.swift */; };
 		D4290EF1264317BA001417BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4290EF0264317BA001417BD /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1477D41626675BC600212C6F /* Spinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spinner.swift; sourceTree = "<group>"; };
 		D41B12B3264FD08E005C6077 /* SidebarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarItem.swift; sourceTree = "<group>"; };
 		D4290EE9264317B9001417BD /* Mac Toolbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mac Toolbar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4290EEE264317B9001417BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1477D41526675BB900212C6F /* Minis */ = {
+			isa = PBXGroup;
+			children = (
+				1477D41A26675E3700212C6F /* Spinner */,
+			);
+			path = Minis;
+			sourceTree = "<group>";
+		};
+		1477D41A26675E3700212C6F /* Spinner */ = {
+			isa = PBXGroup;
+			children = (
+				1477D41626675BC600212C6F /* Spinner.swift */,
+			);
+			path = Spinner;
+			sourceTree = "<group>";
+		};
 		D41B12AF264FD06C005C6077 /* Template */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +153,7 @@
 		D4E3F3C22646E0460019D3EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1477D41526675BB900212C6F /* Minis */,
 				D41B12AF264FD06C005C6077 /* Template */,
 				D45EE3B726440819002B6B8D /* Ushi_Image.swift */,
 				D4E3F3C9264713880019D3EB /* ImageList.swift */,
@@ -224,6 +243,7 @@
 				D442674B265439090038A5D5 /* AppDelegate.swift in Sources */,
 				D4E3F3B72646D7FF0019D3EB /* ImageStruct.swift in Sources */,
 				D45A4981264FA42000871799 /* ImageHelper.swift in Sources */,
+				1477D41726675BC600212C6F /* Spinner.swift in Sources */,
 				D4E3F3CA264713880019D3EB /* ImageList.swift in Sources */,
 				D41B12B4264FD08E005C6077 /* SidebarItem.swift in Sources */,
 				D4290EEF264317B9001417BD /* ContentView.swift in Sources */,

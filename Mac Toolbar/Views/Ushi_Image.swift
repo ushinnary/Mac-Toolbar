@@ -39,7 +39,7 @@ struct Ushi_Image: View {
 				}
 				
 			} else {
-				Text("Loading")
+				Spinner()
 			}
 		}
 		.onAppear(perform: {
