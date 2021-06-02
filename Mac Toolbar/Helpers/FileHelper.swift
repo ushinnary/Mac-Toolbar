@@ -58,24 +58,17 @@ class AppFilesManager {
 
 
 func handleOnDrop(providers: [NSItemProvider]) -> Bool {
-	if providers.isEmpty {
-		return false
-	}
+	if providers.isEmpty {return false}
 	providers.forEach{item in
 		item.loadItem(forTypeIdentifier: "public.file-url", options: nil) { (urlData, error) in
 			DispatchQueue.main.async {
 				if let urlData = urlData as? Data {
 					let url = NSURL(absoluteURLWithDataRepresentation: urlData, relativeTo: nil) as URL
 					let isFolder = url.absoluteString.hasSuffix("/")
-					addOrRemoveFileToJson(location: url.absoluteString.replacingOccurrences(of: "file://", with: String()), isFolder: isFolder)
-					//					if !isFolder {
-					//					} else {
-					//
-					//					}
-					//						guard let image = NSImage(contentsOf: url) else {
-					//							return
-					//						}
-					//						self.onDropHandler(image)
+					let cleanedURL: String = url.absoluteString
+						.replacingOccurrences(of: "file://", with: String())
+						.replacingOccurrences(of: "%20", with: " ")
+					addOrRemoveFileToJson(location: cleanedURL, isFolder: isFolder)
 				}
 			}
 		}

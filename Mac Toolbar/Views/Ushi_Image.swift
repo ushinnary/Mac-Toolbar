@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AppKit
+import AVKit
 
 struct Ushi_Image: View {
 	var imgObj: StoredImage
@@ -38,12 +39,20 @@ struct Ushi_Image: View {
 					Spacer()
 				}
 				
+			} else if imgObj.isVideo{
+				VideoPlayer(player: AVPlayer(url:  imgObj.url!))
+					.onTapGesture {
+						appState.selectedStoreImage = !isActive ? imgObj : nil
+						appState.video = appState.selectedStoreImage == nil ? nil : AVPlayer(url:  imgObj.url!)
+					}
 			} else {
 				Spinner()
 			}
 		}
 		.onAppear(perform: {
-			renderImage()
+			if imgObj.isImage {
+				renderImage()
+			}
 		})
 		.padding(15)
 	}

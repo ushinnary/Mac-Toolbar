@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 struct ImageList: View {
 	var selectedGroup: String?
@@ -41,6 +42,10 @@ struct ImageList: View {
 						Text("Set as background")
 					}
 					Spacer()
+				} else if appState.video  != nil {
+					VideoPlayer(player: appState.video! as? AVPlayer)
+						.aspectRatio(contentMode: .fit)
+					Text(appState.selectedStoreImage!.name)
 				} else {
 					Spacer()
 					Text("Select image")

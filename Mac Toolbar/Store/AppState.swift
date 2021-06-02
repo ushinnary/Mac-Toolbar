@@ -6,6 +6,7 @@
 //
 
 import AppKit
+
 class AppState: ObservableObject {
 	
 	// 1
@@ -15,7 +16,20 @@ class AppState: ObservableObject {
 	}
 	
 	// 2
-	@Published var image: NSImage?
+	@Published var image: NSImage? {
+		didSet {
+			if image != nil {
+				self.video = nil
+			}
+		}
+	}
+	@Published var video: NSObject? {
+		didSet {
+			if (video != nil) {
+				image = nil
+			}
+		}
+	}
 	
 	// 3
 	@Published var selectedStoreImage: StoredImage? {
