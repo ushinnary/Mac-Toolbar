@@ -75,3 +75,25 @@ func handleOnDrop(providers: [NSItemProvider]) -> Bool {
 	}
 	return true
 }
+
+func getFileSizeInBytes(size: UInt64) -> String {
+	let sizeNames: [String] = ["Bytes", "KB", "MB", "GB", "TB"]
+	let doubleDivider = 1000.0
+	var sizeIndex: Int = 0
+	var newValue: Double = Double(size)
+	
+	while (newValue / doubleDivider).rounded() >= 1.0 {
+		if sizeIndex+1 >= sizeNames.count {
+			break
+		}
+		sizeIndex += 1
+		newValue = (Double(newValue) / doubleDivider)
+	}
+	
+	let numberFormatter = NumberFormatter()
+	numberFormatter.numberStyle = .decimal
+	numberFormatter.maximumFractionDigits = 2
+	guard let number =  numberFormatter.string(from: NSNumber(value: newValue)) else { fatalError("Can not get number") }
+	
+	return "\(number) \(sizeNames[sizeIndex])"
+}

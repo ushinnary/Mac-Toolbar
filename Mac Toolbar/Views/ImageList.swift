@@ -25,27 +25,33 @@ struct ImageList: View {
 			ScrollView {
 				LazyVGrid(columns: columns, spacing: 20) {
 					ForEach(items, id: \.location) { item in
-						Ushi_Image(imgObj: item)
+						ImageItem(imgObj: item)
 					}
 				}
 				.padding(.horizontal)
 			}
 			.frame(maxWidth: .infinity)
 			VStack {
-				if appState.image != nil {
-					Image(nsImage: appState.image!)
-						.resizable()
-						.scaledToFit()
-						.cornerRadius(10)
-						.padding()
+				if appState.selectedStoreImage != nil {
+					if appState.image != nil {
+						Image(nsImage: appState.image!)
+							.resizable()
+							.scaledToFit()
+							.cornerRadius(10)
+							.padding()
+					} else if appState.video != nil {
+						VideoPlayer(player: appState.video! as? AVPlayer)
+							.aspectRatio(contentMode: .fit)
+							.frame(maxWidth: 300, minHeight: 168, maxHeight: 168)
+						Text(appState.selectedStoreImage!.name)
+					}
+					Section(header: Text("Informations")) {
+						Text("Name: ")
+					}
 					Button(action: setSelectedAsBG) {
 						Text("Set as background")
 					}
 					Spacer()
-				} else if appState.video  != nil {
-					VideoPlayer(player: appState.video! as? AVPlayer)
-						.aspectRatio(contentMode: .fit)
-					Text(appState.selectedStoreImage!.name)
 				} else {
 					Spacer()
 					Text("Select image")
@@ -55,6 +61,14 @@ struct ImageList: View {
 			.frame(maxWidth: 300, maxHeight: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
 		}
 		.onDrop(of: ["public.file-url"], isTargeted: nil, perform: handleOnDrop(providers:))
+		.background(
+			appState.image != nil
+				? Image(nsImage: appState.image!)
+				.resizable()
+				.blur(radius: 10.0)
+				.overlay(Color(red: 0, green: 0, blue: 0, opacity: 0.3))
+			: nil
+		)
 		
 	}
 	

@@ -29,10 +29,10 @@ struct StoredImage: Hashable, Codable, Identifiable {
 		do {
 			let attrs = try fm.fileManager.attributesOfItem(atPath: location)
 			let dict = attrs as NSDictionary
-			
-			self.size = dict.fileSize()
+
+			self.size = getFileSizeInBytes(size: dict.fileSize())
 		} catch {
-			self.size = 0
+			self.size = String()
 		}
 
 		self.location = location
@@ -45,7 +45,7 @@ struct StoredImage: Hashable, Codable, Identifiable {
 	}
 	var id = UUID()
 	var name, location, group: String
-	var size: UInt64 = UInt64()
+	var size: String =  String()
 	var width: Int8 = Int8()
 	var height: Int8 = Int8()
 	var aspectRatio: String = String()

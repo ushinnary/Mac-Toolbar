@@ -9,8 +9,10 @@ import AppKit
 
 func setSelectedAsBG()-> Void {
 	if appState.selectedStoreImage == nil {return}
-	let imgurl = URL(fileURLWithPath: appState.selectedStoreImage!.location)
-	_setBgByUrl(imgurl)
+	if ((appState.selectedStoreImage?.isImage) != nil) {
+		let imgurl = URL(fileURLWithPath: appState.selectedStoreImage!.location)
+		_setBgByUrl(imgurl)
+	}
 }
 
 private func _setBgByUrl(_ url: URL)-> Void {

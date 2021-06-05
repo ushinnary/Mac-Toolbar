@@ -9,7 +9,7 @@ import SwiftUI
 import AppKit
 import AVKit
 
-struct Ushi_Image: View {
+struct ImageItem: View {
 	var imgObj: StoredImage
 	@State private var image: NSImage? = nil
 	@EnvironmentObject var appState: AppState
@@ -17,9 +17,9 @@ struct Ushi_Image: View {
 		return imgObj.location == appState.selectedStoreImage?.location
 	}
 	var body: some View {
-		VStack(alignment: .leading) {
+		VStack(alignment: .center) {
+			Spacer()
 			if image != nil {
-				Spacer()
 				Image(nsImage: image!)
 					.resizable()
 					.scaledToFit()
@@ -28,32 +28,36 @@ struct Ushi_Image: View {
 						isActive ? RoundedRectangle(cornerRadius: 10)
 							.stroke(Color.accentColor, lineWidth: 4) : nil
 					)
-					.onTapGesture {
-						appState.selectedStoreImage = !isActive ? imgObj : nil
-						appState.image = appState.selectedStoreImage == nil ? nil : image
-					}
-				Spacer()
-				HStack {
-					Text(imgObj.name)
-						.font(.caption)
-					Spacer()
-				}
-				
 			} else if imgObj.isVideo{
 				VideoPlayer(player: AVPlayer(url:  imgObj.url!))
-					.onTapGesture {
-						appState.selectedStoreImage = !isActive ? imgObj : nil
-						appState.video = appState.selectedStoreImage == nil ? nil : AVPlayer(url:  imgObj.url!)
-					}
+					.scaledToFit()
+					.frame(maxWidth: .infinity, maxHeight: .infinity)
 			} else {
 				Spinner()
 			}
+			Spacer()
+			HStack {
+				Text(imgObj.name)
+					.font(.subheadline)
+					.cornerRadius(10)
+					.foregroundColor(appState.image != nil ? .white : .black)
+				Spacer()
+			}
+			
 		}
 		.onAppear(perform: {
 			if imgObj.isImage {
 				renderImage()
 			}
 		})
+		.onTapGesture {
+			appState.selectedStoreImage = !isActive ? imgObj : nil
+			if imgObj.isVideo {
+				appState.setVideo(video: AVPlayer(url:  imgObj.url!))
+			} else {
+				appState.setImage(img: image)
+			}
+		}
 		.padding(15)
 	}
 	
@@ -76,7 +80,7 @@ struct Ushi_Image: View {
 struct CircleImage_Previews: PreviewProvider {
 	@EnvironmentObject var appState: AppState
 	static var previews: some View {
-		Ushi_Image(imgObj: AppState.shared.lsItems.first!)
+		ImageItem(imgObj: AppState.shared.lsItems.first!)
 			.padding(.vertical)
 			.environmentObject(AppState.shared)
 	}

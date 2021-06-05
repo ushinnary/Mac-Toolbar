@@ -8,7 +8,7 @@
 import AppKit
 import Combine
 
-let defaultImageSize = 500
+let defaultImageSize = 300
 
 extension NSImage {
 	

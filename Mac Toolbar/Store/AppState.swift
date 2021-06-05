@@ -8,43 +8,24 @@
 import AppKit
 
 class AppState: ObservableObject {
-	
-	// 1
 	static let shared = AppState()
 	private init() {
 		lsItems =  try! loadJsonByFileName()
 	}
-	
-	// 2
-	@Published var image: NSImage? {
-		didSet {
-			if image != nil {
-				self.video = nil
-			}
-		}
-	}
-	@Published var video: NSObject? {
-		didSet {
-			if (video != nil) {
-				image = nil
-			}
-		}
-	}
-	
-	// 3
-	@Published var selectedStoreImage: StoredImage? {
-		didSet {
-			//			guard selectedStoreImage != nil else {return}
-			//			DispatchQueue.global().async {
-			//				let url = URL(fileURLWithPath: (self.selectedStoreImage?.location)!)
-			//				guard let img = resizedImage(at: url) else {
-			//					return
-			//				}
-			//				DispatchQueue.main.async {
-			//					self.image = img
-			//				}
-			//			}
-		}
-	}
+	@Published private(set) var image: NSImage? 
+	@Published  private(set) var video: NSObject?
+	@Published var selectedStoreImage: StoredImage?
 	@Published var lsItems: [StoredImage] = []
+	
+	func setImage(img: NSImage?)-> Void {
+		if self.selectedStoreImage == nil {return}
+		self.image = img
+		self.video = nil
+	}
+	
+	func setVideo(video: NSObject?)-> Void {
+		if self.selectedStoreImage == nil {return}
+		self.video = video
+		self.image = nil
+	}
 }
