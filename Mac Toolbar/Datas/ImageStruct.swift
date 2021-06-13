@@ -29,12 +29,12 @@ struct StoredImage: Hashable, Codable, Identifiable {
 		do {
 			let attrs = try fm.fileManager.attributesOfItem(atPath: location)
 			let dict = attrs as NSDictionary
-
-			self.size = getFileSizeInBytes(size: dict.fileSize())
+			
+			self.size = dict.fileSize()
 		} catch {
-			self.size = String()
+			self.size = UInt64()
 		}
-
+		
 		self.location = location
 		self.name = imageName
 		self.group = _getLastFolderName(str: self.location)
@@ -45,7 +45,7 @@ struct StoredImage: Hashable, Codable, Identifiable {
 	}
 	var id = UUID()
 	var name, location, group: String
-	var size: String =  String()
+	var size: UInt64 = UInt64()
 	var width: Int8 = Int8()
 	var height: Int8 = Int8()
 	var aspectRatio: String = String()
@@ -53,6 +53,10 @@ struct StoredImage: Hashable, Codable, Identifiable {
 	var imageType: AcceptableImageExtension? {
 		let ext = self.location.split(separator: ".").last!
 		return AcceptableImageExtension(rawValue: String(ext))
+	}
+	
+	var formattedFileSize: String {
+		return getFileSizeInBytes(size: self.size)
 	}
 	
 	var isVideo: Bool {

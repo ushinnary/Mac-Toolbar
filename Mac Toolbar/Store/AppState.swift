@@ -17,14 +17,24 @@ class AppState: ObservableObject {
 	@Published var selectedStoreImage: StoredImage?
 	@Published var lsItems: [StoredImage] = []
 	
+	var SidebarGroups: [String] {
+		return Array(Set(appState.lsItems.map{$0.group})).sorted { $0 < $1 }
+	}
+	
 	func setImage(img: NSImage?)-> Void {
-		if self.selectedStoreImage == nil {return}
+		if self.selectedStoreImage == nil {
+			self.image = nil
+			return
+		}
 		self.image = img
 		self.video = nil
 	}
 	
 	func setVideo(video: NSObject?)-> Void {
-		if self.selectedStoreImage == nil {return}
+		if self.selectedStoreImage == nil {
+			self.video = nil
+			return
+		}
 		self.video = video
 		self.image = nil
 	}

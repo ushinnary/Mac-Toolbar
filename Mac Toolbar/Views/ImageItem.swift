@@ -30,7 +30,6 @@ struct ImageItem: View {
 					)
 			} else if imgObj.isVideo{
 				VideoPlayer(player: AVPlayer(url:  imgObj.url!))
-					.scaledToFit()
 					.frame(maxWidth: .infinity, maxHeight: .infinity)
 			} else {
 				Spinner()
@@ -40,7 +39,7 @@ struct ImageItem: View {
 				Text(imgObj.name)
 					.font(.subheadline)
 					.cornerRadius(10)
-					.foregroundColor(appState.image != nil ? .white : .black)
+					.foregroundColor(appState.image != nil ? .white : Color("DefaultTextColor"))
 				Spacer()
 			}
 			

@@ -20,6 +20,9 @@ struct ImageList: View {
 	let columns = [
 		GridItem(.adaptive(minimum: 200, maximum: 200), spacing: 50, alignment: .center)
 	]
+	private var player: AVPlayer? {
+		return appState.video != nil ? appState.video as? AVPlayer : nil
+	}
 	var body: some View {
 		HStack {
 			ScrollView {
@@ -39,15 +42,18 @@ struct ImageList: View {
 							.scaledToFit()
 							.cornerRadius(10)
 							.padding()
-					} else if appState.video != nil {
-						VideoPlayer(player: appState.video! as? AVPlayer)
-							.aspectRatio(contentMode: .fit)
+					} else if player != nil {
+						VideoPlayer(player: player)
 							.frame(maxWidth: 300, minHeight: 168, maxHeight: 168)
+							.onAppear() {
+								player?.play()
+							}
+							.onDisappear(){
+								player?.pause()
+							}
 						Text(appState.selectedStoreImage!.name)
 					}
-					Section(header: Text("Informations")) {
-						Text("Name: ")
-					}
+					MediaInfo()
 					Button(action: setSelectedAsBG) {
 						Text("Set as background")
 					}
@@ -69,10 +75,36 @@ struct ImageList: View {
 				.overlay(Color(red: 0, green: 0, blue: 0, opacity: 0.3))
 			: nil
 		)
-		
 	}
 	
 	
+}
+
+struct MediaInfo: View {
+	@EnvironmentObject var appState: AppState
+	var body: some View {
+		if appState.selectedStoreImage != nil {
+			Section(header: Text("Informations")) {
+				LabelTextInline(label: "Name:", text: appState.selectedStoreImage!.name)
+				LabelTextInline(label: "Group:", text: appState.selectedStoreImage!.group)
+				LabelTextInline(label: "Size:", text: appState.selectedStoreImage!.formattedFileSize)
+			}
+		} else {
+			EmptyView()
+		}
+	}
+}
+
+struct LabelTextInline: View {
+	var label, text: String
+	var body: some View {
+		HStack(spacing: 0) {
+			Text(label)
+			Spacer()
+			Text(text)
+		}
+		.padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+	}
 }
 
 struct ImageList_Previews: PreviewProvider {
