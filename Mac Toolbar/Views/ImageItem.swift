@@ -58,6 +58,7 @@ struct ImageItem: View {
 			}
 		}
 		.padding(15)
+		.animation(.default)
 	}
 	
 	func renderImage() {
@@ -68,7 +69,9 @@ struct ImageItem: View {
 				return
 			}
 			DispatchQueue.main.async {
-				image = img
+				withAnimation{
+					image = img
+				}
 			}
 		}
 		

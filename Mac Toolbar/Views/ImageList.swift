@@ -17,12 +17,13 @@ struct ImageList: View {
 				return  item.group == selectedGroup
 			}
 	}
+	private var fontColor: Color {
+		return appState.image != nil ? .white : Color("DefaultTextColor")
+	}
 	let columns = [
 		GridItem(.adaptive(minimum: 200, maximum: 200), spacing: 50, alignment: .center)
 	]
-	private var player: AVPlayer? {
-		return appState.video != nil ? appState.video as? AVPlayer : nil
-	}
+	
 	var body: some View {
 		HStack {
 			ScrollView {
@@ -42,18 +43,18 @@ struct ImageList: View {
 							.scaledToFit()
 							.cornerRadius(10)
 							.padding()
-					} else if player != nil {
-						VideoPlayer(player: player)
+					} else if appState.player != nil {
+						VideoPlayer(player: appState.player)
 							.frame(maxWidth: 300, minHeight: 168, maxHeight: 168)
-							.onAppear() {
-								player?.play()
-							}
 							.onDisappear(){
-								player?.pause()
+								appState.player?.pause()
 							}
-						Text(appState.selectedStoreImage!.name)
+							.padding()
 					}
+					Text(appState.selectedStoreImage!.name)
+						.foregroundColor(fontColor)
 					MediaInfo()
+						.foregroundColor(fontColor)
 					Button(action: setSelectedAsBG) {
 						Text("Set as background")
 					}
@@ -64,17 +65,10 @@ struct ImageList: View {
 					Spacer()
 				}
 			}
-			.frame(maxWidth: 300, maxHeight: .infinity, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+			.frame(width: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
 		}
 		.onDrop(of: ["public.file-url"], isTargeted: nil, perform: handleOnDrop(providers:))
-		.background(
-			appState.image != nil
-				? Image(nsImage: appState.image!)
-				.resizable()
-				.blur(radius: 10.0)
-				.overlay(Color(red: 0, green: 0, blue: 0, opacity: 0.3))
-			: nil
-		)
+		.animation(.default)
 	}
 	
 	

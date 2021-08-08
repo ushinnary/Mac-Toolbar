@@ -16,13 +16,15 @@ struct SidebarItems: View {
 					SidebarItem(title: title)
 				}
 			}
-			.frame(width: 200, alignment: .center)
+			.listStyle(SidebarListStyle())
+			.frame(maxWidth: 250, alignment: .center)
 		}
 		
 	}
 }
 
 struct SidebarItem: View {
+	@EnvironmentObject var appState: AppState
 	var title: String
 	var body: some View {
 		NavigationLink(destination: ImageList(selectedGroup: title)) {

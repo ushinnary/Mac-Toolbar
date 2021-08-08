@@ -12,6 +12,7 @@ struct Mac_ToolbarApp: App {
     init() {
         setDefaultImagesJson()
     }
+
     var body: some Scene {
         WindowGroup {
             StoreContentView

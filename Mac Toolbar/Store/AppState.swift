@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import AVKit
 
 class AppState: ObservableObject {
 	static let shared = AppState()
@@ -16,6 +17,9 @@ class AppState: ObservableObject {
 	@Published  private(set) var video: NSObject?
 	@Published var selectedStoreImage: StoredImage?
 	@Published var lsItems: [StoredImage] = []
+	@Published var selectedGroup: String? = nil
+	@Published var player: AVPlayer? = nil
+	
 	
 	var SidebarGroups: [String] {
 		return Array(Set(appState.lsItems.map{$0.group})).sorted { $0 < $1 }
@@ -28,6 +32,7 @@ class AppState: ObservableObject {
 		}
 		self.image = img
 		self.video = nil
+		self.player = nil
 	}
 	
 	func setVideo(video: NSObject?)-> Void {
@@ -37,5 +42,6 @@ class AppState: ObservableObject {
 		}
 		self.video = video
 		self.image = nil
+		self.player = self.video as? AVPlayer 
 	}
 }

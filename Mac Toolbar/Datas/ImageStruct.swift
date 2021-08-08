@@ -12,9 +12,14 @@ struct StoredImage: Hashable, Codable, Identifiable {
 	init?(fullFileName: String) {
 		self.init(location: "\(systemImagesPath)/\(fullFileName)")
 	}
+
 	init?(location: String, deletable: Bool = false) {
-		if location.isEmpty || !fm.fileManager.fileExists(atPath: location) {return nil}
-		if location.split(separator: ".").count != 2 {return nil}
+		if location.isEmpty || !fm.fileManager.fileExists(atPath: location) {
+			return nil
+		}
+		if location.split(separator: ".").count != 2 {
+			return nil
+		}
 		let fullFileName = location.split(separator: "/").last!
 		let nameAndExtension = fullFileName.split(separator: ".")
 		// Is hidden folder
@@ -29,20 +34,22 @@ struct StoredImage: Hashable, Codable, Identifiable {
 		do {
 			let attrs = try fm.fileManager.attributesOfItem(atPath: location)
 			let dict = attrs as NSDictionary
-			
+
 			self.size = dict.fileSize()
 		} catch {
 			self.size = UInt64()
 		}
-		
+
 		self.location = location
 		self.name = imageName
 		self.group = _getLastFolderName(str: self.location)
 		self.deletable = deletable
 	}
+
 	enum AcceptableImageExtension: String {
-		case jpg, png, mp4, heic
+		case jpg, png, mp4, heic, jpeg
 	}
+
 	var id = UUID()
 	var name, location, group: String
 	var size: UInt64 = UInt64()
@@ -54,23 +61,27 @@ struct StoredImage: Hashable, Codable, Identifiable {
 		let ext = self.location.split(separator: ".").last!
 		return AcceptableImageExtension(rawValue: String(ext))
 	}
-	
+
 	var formattedFileSize: String {
 		return getFileSizeInBytes(size: self.size)
 	}
-	
+
 	var isVideo: Bool {
-		if self.imageType == nil {return false}
+		if self.imageType == nil {
+			return false
+		}
 		let videoTypes: [AcceptableImageExtension] = [.mp4]
 		return videoTypes.contains(self.imageType!)
 	}
-	
+
 	var isImage: Bool {
-		if self.imageType == nil {return false}
-		let imgTypes: [AcceptableImageExtension] = [.heic, .jpg, .png]
+		if self.imageType == nil {
+			return false
+		}
+		let imgTypes: [AcceptableImageExtension] = [.heic, .jpg, .jpeg, .png]
 		return imgTypes.contains(self.imageType!)
 	}
-	
+
 	var url: URL? {
 		return URL(fileURLWithPath: self.location)
 	}

@@ -18,7 +18,7 @@ class AppFilesManager {
 	enum Error: Swift.Error {
 		case fileAlreadyExists
 		case invalidDirectory
-		case writtingFailed
+		case writingFailed
 		case fileNotExists
 		case readingFailed
 	}
@@ -34,7 +34,7 @@ class AppFilesManager {
 			try data.write(to: url)
 		} catch {
 			debugPrint(error)
-			throw Error.writtingFailed
+			throw Error.writingFailed
 		}
 	}
 	func read(fileNamed: String) throws -> Data {
@@ -83,7 +83,7 @@ func getFileSizeInBytes(size: UInt64) -> String {
 	var newValue: Double = Double(size)
 	
 	while (newValue / doubleDivider).rounded() >= 1.0 {
-		if sizeIndex+1 >= sizeNames.count {
+		if sizeIndex + 1 >= sizeNames.count {
 			break
 		}
 		sizeIndex += 1

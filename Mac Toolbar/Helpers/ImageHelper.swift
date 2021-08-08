@@ -12,7 +12,7 @@ let defaultImageSize = 300
 
 extension NSImage {
 	
-	func resizedImageTo(sourceImage: NSImage, newSize: NSSize) -> NSImage?{
+	func resizedImageTo(sourceImage: NSImage, newSize: NSSize) -> NSImage? {
 		if sourceImage.isValid == false {
 			return nil
 		}
@@ -46,8 +46,12 @@ extension NSImage {
 	
 	var cgImage: CGImage? {
 		get {
-			guard let imageData = self.tiffRepresentation else { return nil }
-			guard let sourceData = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }
+			guard let imageData = self.tiffRepresentation else {
+				return nil
+			}
+			guard let sourceData = CGImageSourceCreateWithData(imageData as CFData, nil) else {
+				return nil
+			}
 			return CGImageSourceCreateImageAtIndex(sourceData, 0, nil)
 		}
 	}
@@ -76,18 +80,20 @@ extension NSImage {
 	}
 }
 
-func getOptimizedImageSize(img: NSImage) ->NSSize {
+func getOptimizedImageSize(img: NSImage) -> NSSize {
 	let maxImageSize = CGFloat(defaultImageSize)
 	var width = img.size.width
 	var height = img.size.height
-	if (width <= maxImageSize && height <= maxImageSize) {return img.size}
-	let aspectRatio = width/height
+	if (width <= maxImageSize && height <= maxImageSize) {
+		return img.size
+	}
+	let aspectRatio = width / height
 	if (width > height) {
 		width = maxImageSize
-		height = width/aspectRatio
+		height = width / aspectRatio
 	} else {
-		height =  maxImageSize
-		width = height/aspectRatio
+		height = maxImageSize
+		width = height / aspectRatio
 	}
 	return NSSize(width: width, height: height)
 }
